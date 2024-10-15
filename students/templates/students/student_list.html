@@ -1,0 +1,60 @@
+<!-- students/templates/students/student_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .add-student {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 4px;
+        }
+        .add-student:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Students</h1>
+    <a href="{% url 'student_create' %}" class="add-student">Add New Student</a>
+    <ul>
+        {% for student in students %}
+        <li>
+            <a href="{% url 'student_detail' student.pk %}">{{ student.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
