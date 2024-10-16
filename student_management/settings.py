@@ -13,8 +13,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Debug mode
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# Allowed hosts
+# settings.py
+
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
+
 
 # Installed apps
 INSTALLED_APPS = [
