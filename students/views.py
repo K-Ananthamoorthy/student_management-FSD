@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
 from .forms import StudentForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
 
 def student_list(request):
     students = Student.objects.all()
@@ -19,3 +22,10 @@ def student_create(request):
     else:
         form = StudentForm()
     return render(request, 'students/student_form.html', {'form': form})
+
+def create_superuser(request):
+    if not User.objects.filter(is_superuser=True).exists():
+        User.objects.create_superuser('admin', 'admin@example.com', 'adminpassword')
+        return HttpResponse('Superuser created!')
+    else:
+        return HttpResponse('Superuser already exists!')
