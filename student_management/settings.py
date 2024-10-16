@@ -5,7 +5,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-4%&8#)sfakl)l3_sljh39kjs0f+9($k#$%@mfwoi0oqcrlq7ec'
 DEBUG = True
-ALLOWED_HOSTS = ['your-render-app.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['https://sms-fsd.onrender.com', 'localhost', '127.0.0.1']
 
 
 INSTALLED_APPS = [
