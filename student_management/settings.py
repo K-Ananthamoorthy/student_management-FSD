@@ -1,13 +1,23 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-4%&8#)sfakl)l3_sljh39kjs0f+9($k#$%@mfwoi0oqcrlq7ec'
-DEBUG = True
-ALLOWED_HOSTS = ['https://sms-fsd.onrender.com', 'localhost', '127.0.0.1']
+# Secret Key
+SECRET_KEY = os.getenv('SECRET_KEY')
 
+# Debug mode
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
+# Allowed hosts
+
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
+
+# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -18,6 +28,7 @@ INSTALLED_APPS = [
     'students',  # Your app
 ]
 
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -31,6 +42,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'student_management.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -49,18 +61,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'student_management.wsgi.application'
 
-# Supabase database configuration
+# Supabase PostgreSQL database configuration from environment variables
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL as the database engine
-        'NAME': 'postgres',                       # Replace with your Supabase database name
-        'USER': 'postgres.qulkefsjzmyecgkjcvne',                       # Replace with your Supabase database user
-        'PASSWORD': '4PazMbCfGg#V8rd',               # Replace with your Supabase database password
-        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',    # Replace with your Supabase DB URL
-        'PORT': '6543',                               # Default PostgreSQL port
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('SUPABASE_DB_NAME'),
+        'USER': os.getenv('SUPABASE_DB_USER'),
+        'PASSWORD': os.getenv('SUPABASE_DB_PASSWORD'),
+        'HOST': os.getenv('SUPABASE_DB_HOST'),
+        'PORT': os.getenv('SUPABASE_DB_PORT', '5432'),
     }
 }
 
+# Authentication password validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -70,14 +83,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Localization settings
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Enable WhiteNoise to serve static files
+# WhiteNoise configuration for serving static files
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Auto field configuration
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
