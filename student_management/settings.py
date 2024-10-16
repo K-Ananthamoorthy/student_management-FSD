@@ -14,7 +14,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # Allowed hosts
-
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 # Installed apps
@@ -89,8 +88,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-
-#static files (CSS, JavaScript, images)
+# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
